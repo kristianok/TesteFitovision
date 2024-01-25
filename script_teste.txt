@@ -107,3 +107,30 @@ CREATE TRIGGER Entrega BEFORE INSERT ON Pedido
 INSERT INTO Pedido(ClienteID,RestauranteID,DataPedido, DataEntrega) VALUES (1, 1, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),STR_TO_DATE('25-01-2024', '%d-%m-%Y'));
 
 SELECT * FROM Pedido;
+
+CREATE TABLE Conta (
+       ContaID int auto_increment PRIMARY KEY,
+       ClienteID int not null,
+       Saldo float,
+       Constraint FK_Conta_Cliente Foreign Key (ClienteID) REFERENCES Cliente(ClienteID)
+);
+
+CREATE TABLE Transacao (
+       TransacaoID int auto_increment PRIMARY KEY,
+       ContaID int not null,
+       Valor float,
+       DataTransacao date,
+       Constraint FK_Transacao_Conta Foreign Key (ContaID) REFERENCES Conta(ContaID)
+);
+
+INSERT INTO Conta(ClienteID, Saldo) VALUES (1,1000);
+INSERT INTO Conta(ClienteID, Saldo) VALUES (2,1400);
+INSERT INTO Conta(ClienteID, Saldo) VALUES (3,2000);
+INSERT INTO Conta(ClienteID, Saldo) VALUES (4,2800);
+INSERT INTO Conta(ClienteID, Saldo) VALUES (5,3000);
+
+INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (1,25,STR_TO_DATE('24-01-2024', '%d-%m-%Y'));
+INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (2,105.30,STR_TO_DATE('24-01-2024', '%d-%m-%Y'));
+INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (3,250.99,STR_TO_DATE('24-01-2024', '%d-%m-%Y'));
+INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (4,49.90,STR_TO_DATE('25-01-2024', '%d-%m-%Y'));
+INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (5,30,STR_TO_DATE('25-01-2024', '%d-%m-%Y'));
