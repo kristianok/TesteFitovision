@@ -134,3 +134,6 @@ INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (2,105.30,STR_TO_DAT
 INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (3,250.99,STR_TO_DATE('24-01-2024', '%d-%m-%Y'));
 INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (4,49.90,STR_TO_DATE('25-01-2024', '%d-%m-%Y'));
 INSERT INTO Transacao(ContaID, Valor, DataTransacao) VALUES (5,30,STR_TO_DATE('25-01-2024', '%d-%m-%Y'));
+
+SELECT c.Nome as NomeCliente,r.Nome as NomeRestaurante,p.DataPedido FROM Pedido p JOIN Cliente c ON p.ClienteID=c.ClienteID JOIN Restaurante r
+ON p.RestauranteID=r.RestauranteID WHERE p.status='Entregue';
