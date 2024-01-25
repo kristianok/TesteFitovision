@@ -1,0 +1,42 @@
+DROP TABLE IF EXISTS Cliente;
+DROP TABLE IF EXISTS Restaurante;
+DROP TABLE IF EXISTS Pedido;
+
+CREATE TABLE Cliente (
+       Cliente_ID int auto_increment PRIMARY KEY,       
+       Nome varchar(30),       
+       Telefone varchar(18)       
+); 
+CREATE TABLE Restaurante (
+       Restaurante_ID int auto_increment PRIMARY KEY,       
+       Nome varchar(30),       
+       Endereco varchar(30)       
+); 
+CREATE TABLE Pedido (
+       Pedido_ID int auto_increment PRIMARY KEY,       
+       Cliente_ID int not null,  
+       Restaurante_ID int not null,     
+       DataPedido date,       
+       Status varchar(16),       
+       Constraint FK_Pedido_Cliente Foreign Key (Cliente_ID) REFERENCES Cliente(Cliente_ID),       
+       Constraint FK_Pedido_Restaurante Foreign Key (Restaurante_ID) REFERENCES Restaurante(Restaurante_ID)
+); 
+
+INSERT INTO Cliente(Nome,Telefone) VALUES ('Joao','+55439111111111');
+INSERT INTO Cliente(Nome,Telefone) VALUES ('Maria','+55439211111111');
+INSERT INTO Cliente(Nome,Telefone) VALUES ('Felipe','+55439311111111');
+INSERT INTO Cliente(Nome,Telefone) VALUES ('Lucas','+55439411111111');
+INSERT INTO Cliente(Nome,Telefone) VALUES ('Marcelo','+55439511111111');
+
+INSERT INTO Restaurante(Nome,Endereco) VALUES ('Hamburgueria','Rua Luiz Felipe');
+INSERT INTO Restaurante(Nome,Endereco) VALUES ('Pizzaria','Avenida das casas');
+INSERT INTO Restaurante(Nome,Endereco) VALUES ('Sushihouse','Rua Central');
+INSERT INTO Restaurante(Nome,Endereco) VALUES ('Habibs','Avenida Argentina');
+INSERT INTO Restaurante(Nome,Endereco) VALUES ('Restaurante Fino','Rua Chique');
+
+INSERT INTO Pedido(Cliente_ID,Restaurante_ID,DataPedido,Status) VALUES (1, 1, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),'Entregue');
+INSERT INTO Pedido(Cliente_ID,Restaurante_ID,DataPedido,Status) VALUES (2, 2, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),'Em Andamento');
+INSERT INTO Pedido(Cliente_ID,Restaurante_ID,DataPedido,Status) VALUES (3, 3, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),'Em Andamento');
+INSERT INTO Pedido(Cliente_ID,Restaurante_ID,DataPedido,Status) VALUES (4, 4, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),'Cancelado');
+INSERT INTO Pedido(Cliente_ID,Restaurante_ID,DataPedido,Status) VALUES (4, 5, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),'Entregue');
+
