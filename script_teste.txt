@@ -90,3 +90,20 @@ INSERT INTO Nota(AlunoID, DisciplinaID, Valor) VALUES (1,7,5.6);
 INSERT INTO Nota(AlunoID, DisciplinaID, Valor) VALUES (1,8,7.2);
 INSERT INTO Nota(AlunoID, DisciplinaID, Valor) VALUES (1,9,9.8);
 INSERT INTO Nota(AlunoID, DisciplinaID, Valor) VALUES (1,10,10);
+
+ALTER TABLE Pedido ADD DataEntrega date;
+
+DROP TRIGGER Entrega;
+
+CREATE TRIGGER Entrega BEFORE INSERT ON Pedido
+     FOR EACH ROW
+     BEGIN
+        IF NEW.DataEntrega IS NOT NULL THEN
+            SET NEW.Status = 'Entregue';
+        END IF;
+     END;
+;
+
+INSERT INTO Pedido(ClienteID,RestauranteID,DataPedido, DataEntrega) VALUES (1, 1, STR_TO_DATE('24-01-2024', '%d-%m-%Y'),STR_TO_DATE('25-01-2024', '%d-%m-%Y'));
+
+SELECT * FROM Pedido;
