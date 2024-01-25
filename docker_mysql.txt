@@ -1,0 +1,1 @@
+docker run --name mysql-testestagiodb -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=TesteEstagioDB -p 3306:3306 -d mysql:latest
